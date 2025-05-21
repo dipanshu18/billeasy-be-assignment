@@ -1,10 +1,9 @@
 import { z } from "zod";
 
 export const addBookSchema = z.object({
-  title: z
-    .string()
-    .min(4, { message: "Book title must be minimum 4 characters long" }),
+  title: z.string().min(4, { message: "Book title must be 4 characters long" }),
   description: z.string().optional(),
+  author: z.string().min(4, "Author name must be 4 characters long"),
   genre: z.enum(
     [
       "FICTION",

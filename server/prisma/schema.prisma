@@ -12,7 +12,6 @@ model User {
   username    String   @unique
   email       String   @unique
   password    String
-  authors     Book[]
   userReviews Review[]
   createdAt   DateTime @default(now()) @map("created-at")
   updatedAt   DateTime @updatedAt @map("updated-at")
@@ -23,8 +22,7 @@ model Book {
   title       String
   description String
   genre       Genre
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    String
+  author      String
   bookReviews Review[]
   createdAt   DateTime @default(now()) @map("created-at")
   updatedAt   DateTime @updatedAt @map("updated-at")
@@ -34,9 +32,9 @@ model Review {
   id        String   @id @default(cuid())
   rating    Int
   content   String
-  book      Book     @relation(fields: [bookId], references: [id])
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   createdAt DateTime @default(now()) @map("created-at")
   updatedAt DateTime @updatedAt @map("updated-at")

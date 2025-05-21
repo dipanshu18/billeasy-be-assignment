@@ -1,6 +1,6 @@
 ## BillEasy Junior Backend Developer Assignment
 
-### ENVIRONMENT VARS needed:
+### ENV VARS needed:
 
 - `DATABASE_URL`
 - `NODE_ENV`
@@ -12,12 +12,24 @@
 
 **Using docker-compose**
 
-- First, docker and docker-compose should be installed on the machine
-- Then, simply run `docker-compose up`
+First, docker and docker-compose should be installed on the machine.
 
-Backend will be available on: `http://localhost:5555`
+Change directory to server
 
-Frontend will be available on: `http://localhost:3000`
+`cd server`
+
+Then, simply run
+
+`docker-compose up`
+
+Backend will be available on
+
+`http://localhost:5555`
+
+Frontend will be available on
+
+`http://localhost:3000`
 
 ### Database Schema
+
 ![db_schema_booksDB](https://github.com/user-attachments/assets/f814deab-ffe9-4335-acfd-3e96ccf0f065)
