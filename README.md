@@ -20,3 +20,4 @@ Backend will be available on: `http://localhost:5555`
 Frontend will be available on: `http://localhost:3000`
 
 ### Database Schema
+![db_schema_booksDB](https://github.com/user-attachments/assets/f814deab-ffe9-4335-acfd-3e96ccf0f065)
