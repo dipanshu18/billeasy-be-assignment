@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  username    String   @unique
+  email       String   @unique
+  password    String
+  authors     Book[]
+  userReviews Review[]
+  createdAt   DateTime @default(now()) @map("created-at")
+  updatedAt   DateTime @updatedAt @map("updated-at")
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  genre       Genre
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  bookReviews Review[]
+  createdAt   DateTime @default(now()) @map("created-at")
+  updatedAt   DateTime @updatedAt @map("updated-at")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  content   String
+  book      Book     @relation(fields: [bookId], references: [id])
+  bookId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now()) @map("created-at")
+  updatedAt DateTime @updatedAt @map("updated-at")
+
+  @@unique([userId, bookId])
+}
+
+enum Genre {
+  FICTION
+  SCIENTIFIC
+  ROMANCE
+  HORROR
+  NOVEL
+  MYSTERY
+  HISTORIC
+  FANTASY
+}
