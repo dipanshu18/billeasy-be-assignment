@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-export const AddBookSchema = z.object({
+export const addBookSchema = z.object({
   title: z
     .string()
     .min(4, { message: "Book title must be minimum 4 characters long" }),
   description: z.string().optional(),
-  genres: z.enum(
+  genre: z.enum(
     [
       "FICTION",
       "SCIENTIFIC",
@@ -18,11 +18,12 @@ export const AddBookSchema = z.object({
     ],
     {
       message:
-        "Genre needs to be any of these types: FICTION, SCIENTIFIC, ROMANCE, HORROR, NOVEL, MYSTERY, HISTORIC, FANTASY",
+        "Genre needs to be any one of these types: FICTION, SCIENTIFIC, ROMANCE, HORROR, NOVEL, MYSTERY, HISTORIC, FANTASY",
     }
   ),
 });
 
 export const submitReviewSchema = z.object({
+  rating: z.number().min(1).max(5),
   content: z.string().min(5, { message: "Review must be 5 characters long" }),
 });

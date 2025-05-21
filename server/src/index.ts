@@ -5,6 +5,7 @@ import cors from "cors";
 import bookRoutes from "./routes/book.route";
 import reviewRoutes from "./routes/review.route";
 import authRoutes from "./routes/auth.route";
+import authMiddleware from "./middlewares/auth.middleware";
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(express.json());
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/books", bookRoutes);
-app.use("/api/v1/reviews", reviewRoutes);
+app.use("/api/v1/reviews", authMiddleware, reviewRoutes);
 
 app.listen(PORT, () => {
   console.log("Server started on port:", PORT);

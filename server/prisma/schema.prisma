@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -33,6 +32,7 @@ model Book {
 
 model Review {
   id        String   @id @default(cuid())
+  rating    Int
   content   String
   book      Book     @relation(fields: [bookId], references: [id])
   bookId    String

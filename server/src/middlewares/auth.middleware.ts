@@ -7,7 +7,7 @@ export default async function authMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  const { token } = req.cookies;
+  const token = req.headers.authorization?.split(" ")[1] ?? "";
 
   if (!token) {
     res.status(401).json({

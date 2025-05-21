@@ -13,11 +13,10 @@ const bookRoutes = express.Router();
 // Get all books (with pagination and optional filters by author and genre)
 bookRoutes.get("/", getAllBooks);
 
-// Only authenticated users
 bookRoutes.post("/", authMiddleware, addNewBook);
 
 // GET /search – Search books by title or author (partial and case-insensitive)
-bookRoutes.get("/search", search);
+// bookRoutes.get("/search", search);
 
 // Get book details by ID, including:
 // Average rating
