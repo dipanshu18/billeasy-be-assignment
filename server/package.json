@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -b",
+    "start": "pnpm build && node dist/index.js",
+    "dev": "npx tsx watch src/index.ts",
+    "db:studio": "npx prisma studio",
+    "db:migrate": "npx prisma migrate dev",
+    "db:generate": "npx prisma generate",
+    "db:deploy": "npx prisma migrate deploy",
+    "seed": "pnpm db:deploy && ts-node --transpile-only src/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +25,12 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.21",
     "prisma": "^6.8.2",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@prisma/client": "6.8.2",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",

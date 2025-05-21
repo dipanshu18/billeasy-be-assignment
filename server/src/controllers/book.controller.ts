@@ -47,7 +47,7 @@ export async function addNewBook(req: Request, res: Response) {
 
 export async function getAllBooks(req: Request, res: Response) {
   try {
-    const limit = Number(req.query.limit) || 10;
+    const limit = Number(req.query.limit) || 5;
     const page = Number(req.query.page) || 1;
 
     const start = (page - 1) * limit;
@@ -120,7 +120,12 @@ export async function getBookDetails(req: Request, res: Response) {
       return;
     }
 
-    const totalReviews = await db.review.count();
+    const totalReviews = await db.review.count({
+      where: {
+        bookId: id,
+      },
+    });
+
     const bookReviews = await db.review.findMany({
       take: limit,
       skip: start,

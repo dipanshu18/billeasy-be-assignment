@@ -5,10 +5,19 @@ import { submitReviewSchema } from "../zodSchemas/book";
 export async function updateReview(req: Request, res: Response) {
   try {
     const { id } = req.params;
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({
+        message: "Unauthorized",
+      });
+      return;
+    }
 
     const reviewExists = await db.review.findFirst({
       where: {
         id,
+        userId,
       },
     });
 
@@ -32,6 +41,7 @@ export async function updateReview(req: Request, res: Response) {
     const updatedReview = await db.review.update({
       where: {
         id,
+        userId,
       },
       data: {
         rating,
@@ -62,10 +72,19 @@ export async function updateReview(req: Request, res: Response) {
 export async function deleteReview(req: Request, res: Response) {
   try {
     const { id } = req.params;
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({
+        message: "Unauthorized",
+      });
+      return;
+    }
 
     const reviewExists = await db.review.findFirst({
       where: {
         id,
+        userId,
       },
     });
 
@@ -79,6 +98,7 @@ export async function deleteReview(req: Request, res: Response) {
     const deletedReview = await db.review.delete({
       where: {
         id,
+        userId,
       },
     });
 

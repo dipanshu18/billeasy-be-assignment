@@ -18,6 +18,11 @@ app.use(
 );
 app.use(express.json());
 
+app.use((req, _, next) => {
+  console.log(req.method, req.path, new Date().toLocaleString());
+  next();
+});
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/books", bookRoutes);
 app.use("/api/v1/reviews", authMiddleware, reviewRoutes);
