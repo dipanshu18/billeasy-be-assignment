@@ -16,21 +16,25 @@ https://documenter.getpostman.com/view/25745501/2sB2qZFhmp
 
 **Local setup**
 
-*Ensure all the required env vars are setup correctly*
-
-Change directory to server
+1. Change directory to server
 
 `cd server`
 
-Then, install dependencies with your choice of package manager (npm, yarn, pnpm) (pnpm preferred)
+2. Then, install dependencies with your choice of package manager (npm, yarn, pnpm) (pnpm preferred)
 
 `pnpm install`
 
-Migrate changes to database
+3. Copy `.env.example` to your own `.env`
+
+`cp .env.example .env`
+
+4. Populate with your env variables
+
+5. Migrate changes to database
 
 `pnpm db:deploy`
 
-If you want to seed data with random data, run
+6. (Optional) If you want to seed data with random data, run
 
 `pnpm seed`
 
