@@ -1,0 +1,26 @@
+version: "3"
+services:
+  node-app:
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - 8000:$PORT
+    command: sh -c "pnpm db:migrate && pnpm db:generate && pnpm dev"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=supersecret123
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 30s
+      retries: 3
+      timeout: 10s
+    volumes:
+      - pgData:/var/lib/postgresql
+volumes:
+  pgData:

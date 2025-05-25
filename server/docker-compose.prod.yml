@@ -1,0 +1,8 @@
+version: "3"
+services:
+  node-app:
+    env_file:
+      - ./.env
+    command: sh -c "pnpm db:deploy && pnpm db:generate && pnpm start"
+    ports:
+      - $PORT:$PORT
